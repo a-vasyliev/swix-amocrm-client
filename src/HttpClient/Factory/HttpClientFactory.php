@@ -6,6 +6,12 @@ use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\HandlerStack;
 use Swix\AmoCrm\HttpClient\AuthMiddleware;
 
+/**
+ * Class HttpClientFactory
+ *
+ * @package Swix\AmoCrm\HttpClient\Factory
+ * @author Andrii Vasyliev
+ */
 class HttpClientFactory
 {
     public static function create($apiUrl, $login, $apiKey, $proxy = null)

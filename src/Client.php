@@ -35,17 +35,17 @@ class Client
     }
 
     /**
-     * @todo Split methods into separate classes
      * @param array $scope
      * @param bool $freeUsers
+     * @return array Account information
      * @throws InvalidScopeException
      */
-    public function account(array $scope = self::SCOPE_TYPES, $freeUsers = true)
+    public function account(array $scope = self::SCOPE_TYPES, bool $freeUsers = true)
     {
         $httpClient = $this->getHttpClient();
 
-        foreach ($scope as $item) {
-            if (!in_array($item, self::SCOPE_TYPES)) {
+        foreach ($scope as $scopeType) {
+            if (!in_array($scopeType, self::SCOPE_TYPES)) {
                 throw new InvalidScopeException('Invalid scope provided');
             }
         }
@@ -56,7 +56,6 @@ class Client
 
         $responseData = json_decode($response->getBody()->getContents(), true);
 
-        var_dump($responseData);
-        exit;
+        return $responseData;
     }
 }

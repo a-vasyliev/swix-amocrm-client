@@ -9,6 +9,12 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Swix\AmoCrm\Exception\AuthException;
 
+/**
+ * Class AuthMiddleware
+ *
+ * @package Swix\AmoCrm\HttpClient
+ * @author Andrii Vasyliev
+ */
 class AuthMiddleware
 {
     /** @var string */
@@ -91,7 +97,13 @@ class AuthMiddleware
         $errorCode = $responseData['error_code'];
 
         if (!isset(self::AUTH_ERROR_CODES[$errorCode])) {
-            throw new AuthException('Unknown auth error');
+            if (isset($responseData['error'])) {
+                $message = 'Unknown auth error: ' . $responseData['error'];
+            } else {
+                $message = 'Unknown auth error';
+            }
+
+            throw new AuthException($message, $errorCode);
         }
 
         if ($errorCode == 401) {
