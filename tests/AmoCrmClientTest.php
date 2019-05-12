@@ -3,18 +3,15 @@
 namespace Swix\AmoCrm\Tests;
 
 use GuzzleHttp\Client as HttpClient;
-
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
+use PHPUnit\Framework\TestCase;
 use Swix\AmoCrm\AmoCrmClient;
 
-use PHPUnit\Framework\TestCase;
-
 /**
- * Class ClientTest
+ * Class ClientTest.
  *
- * @package Swix\AmoCrm\Test
  * @author Andrii Vasyliev
  */
 class AmoCrmClientTest extends TestCase
@@ -30,7 +27,7 @@ class AmoCrmClientTest extends TestCase
 
     protected function setUp()
     {
-        $this->mockHandler = new MockHandler;
+        $this->mockHandler = new MockHandler();
         $this->httpClient = new HttpClient(['handler' => HandlerStack::create($this->mockHandler)]);
 
         $this->client = new AmoCrmClient($this->httpClient);

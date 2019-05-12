@@ -3,19 +3,18 @@
 namespace Swix\AmoCrm;
 
 use GuzzleHttp\Client as HttpClient;
-use Swix\AmoCrm\Exception\InvalidArgumentException;
 use Webmozart\Assert\Assert;
 
 /**
- * Class Client
+ * Class Client.
  *
- * @package Swix\AmoCrm
  * @author Andrii Vasyliev
  */
 class AmoCrmClient
 {
     /**
      * @var array
+     *
      * @see https://www.amocrm.ru/developers/content/api/account#values
      */
     const SCOPE_TYPES = ['custom_fields', 'users', 'pipelines', 'groups', 'note_types', 'task_types'];
@@ -42,7 +41,8 @@ class AmoCrmClient
     /**
      * @param array $scopes
      * @param bool  $freeUsers
-     * @return array    Account information
+     *
+     * @return array Account information
      */
     public function getAccount(array $scopes = self::SCOPE_TYPES, $freeUsers = true)
     {
@@ -51,7 +51,7 @@ class AmoCrmClient
         Assert::allOneOf($scopes, self::SCOPE_TYPES, 'Invalid scopes given');
 
         $response = $httpClient->get(
-            '/api/v2/account?with=' . implode(',', $scopes) . '&free_users=' . ($freeUsers ? 'Y' : 'N')
+            '/api/v2/account?with='.implode(',', $scopes).'&free_users='.($freeUsers ? 'Y' : 'N')
         );
 
         return json_decode($response->getBody()->getContents(), true);

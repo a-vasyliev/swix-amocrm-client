@@ -41,8 +41,8 @@ class OtherErrorsMiddlewareTest extends MiddlewareTestCase
         $response = $this->getResponseMock(100500, json_encode([
             'response' => [
                 'error_code' => 100500,
-                'error' => $error
-            ]
+                'error'      => $error,
+            ],
         ]));
 
         $middleware = new OtherErrorsMiddleware();
@@ -62,8 +62,8 @@ class OtherErrorsMiddlewareTest extends MiddlewareTestCase
         foreach (OtherErrorsMiddleware::ERROR_CODES as $code => $message) {
             $response = $this->getResponseMock(100500, json_encode([
                 'response' => [
-                    'error_code' => $code
-                ]
+                    'error_code' => $code,
+                ],
             ]));
 
             try {
