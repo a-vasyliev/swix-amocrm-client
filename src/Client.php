@@ -3,7 +3,6 @@
 namespace Swix\AmoCrm;
 
 use GuzzleHttp\HandlerStack;
-
 use Swix\AmoCrm\Middleware\AuthenticationMiddleware;
 use Swix\AmoCrm\Middleware\OtherErrorsMiddleware;
 use Swix\AmoCrm\Middleware\RequestRateMiddleware;
@@ -19,13 +18,13 @@ class Client
         (new RequestRateMiddleware())->pushMiddleware($handler);
 
         $client = new \GuzzleHttp\Client([
-            'base_uri' => $apiUrl,
-            'timeout' => 10,
+            'base_uri'        => $apiUrl,
+            'timeout'         => 10,
             'allow_redirects' => true,
-            'cookies' => true,
-            'http_errors' => false,
+            'cookies'         => true,
+            'http_errors'     => false,
             'request.options' => ['proxy' => $proxy],
-            'handler' => $handler
+            'handler'         => $handler,
         ]);
 
         return new AmoCrmClient($client);

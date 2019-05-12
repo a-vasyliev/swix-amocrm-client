@@ -9,6 +9,7 @@ class MiddlewareTestCase extends TestCase
 {
     /**
      * @param string $uriString
+     *
      * @return \PHPUnit\Framework\MockObject\MockObject|RequestInterface
      */
     protected function getRequestMock(string $uriString)

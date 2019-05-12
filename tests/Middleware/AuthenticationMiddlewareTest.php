@@ -73,8 +73,8 @@ class AuthenticationMiddlewareTest extends MiddlewareTestCase
     {
         $response = $this->getResponseMock(100500, json_encode([
             'response' => [
-                'error_code' => 100500
-            ]
+                'error_code' => 100500,
+            ],
         ]));
 
         $middleware = new AuthenticationMiddleware('login', 'apiKey');
@@ -90,8 +90,8 @@ class AuthenticationMiddlewareTest extends MiddlewareTestCase
             $responseData = [
                 'response' => [
                     'error_code' => $code,
-                    'domain' => $domain
-                ]
+                    'domain'     => $domain,
+                ],
             ];
 
             $message = str_replace('{{domain}}', $domain, $message);

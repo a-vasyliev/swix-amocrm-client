@@ -2,17 +2,16 @@
 
 namespace Swix\AmoCrm\Middleware;
 
-use Swix\AmoCrm\Exception\AuthenticationException;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Swix\AmoCrm\Exception\AuthenticationException;
 
 /**
- * Class AuthMiddleware
+ * Class AuthMiddleware.
  *
- * @package Swix\AmoCrm\HttpClient
  * @author Andrii Vasyliev
  */
 class AuthenticationMiddleware
@@ -24,7 +23,7 @@ class AuthenticationMiddleware
         112 => 'Given user is disabled or does not belongs to provided account',
         113 => 'This IP address is not allowed. Please, check AmoCRM IP whitelist for provided account',
         101 => 'Given account does not exists',
-        401 => 'Account does not exists on provided server. Please, use another one: {{domain}}'
+        401 => 'Account does not exists on provided server. Please, use another one: {{domain}}',
     ];
 
     /** @var string */
@@ -71,7 +70,7 @@ class AuthenticationMiddleware
         $currentUri = $request->getUri();
         $divider = strpos($currentUri, '?') === false ? '?' : '&';
 
-        $uri = new Uri($currentUri . $divider . http_build_query(['login' => $login, 'api_key' => $apiKey]));
+        $uri = new Uri($currentUri.$divider.http_build_query(['login' => $login, 'api_key' => $apiKey]));
 
         return \GuzzleHttp\Psr7\modify_request($request, ['uri' => $uri]);
     }
