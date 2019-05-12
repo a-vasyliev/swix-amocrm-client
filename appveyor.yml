@@ -1,6 +1,6 @@
 build: false
 platform: x86
-clone_folder: c:\projects\avasyliev\swix-amocrm-client
+clone_folder: c:\projects\a-vasyliev\swix-amocrm-client
 
 branches:
   only:
