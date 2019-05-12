@@ -1,27 +1,15 @@
 <?php
 
-namespace Swix\AmoCrm\Test;
+namespace Swix\AmoCrm\Tests;
 
-use GuzzleHttp\Client as HttpClient;
 use PHPUnit\Framework\TestCase;
+use Swix\AmoCrm\Client;
 
-/**
- * Class ClientTest
- *
- * @package Swix\AmoCrm\Test
- * @author Andrii Vasyliev
- */
 class ClientTest extends TestCase
 {
-    protected function getHttpClientMock()
+    public function testCreate()
     {
-        $httpClient = $this->createMock(HttpClient::class);
-
-        return $httpClient;
-    }
-
-    public function testAuth()
-    {
-
+        $client = Client::create('test', 'test', 'test');
+        $this->assertInstanceOf('\Swix\AmoCrm\AmoCrmClient', $client);
     }
 }

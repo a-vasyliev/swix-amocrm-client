@@ -8,7 +8,7 @@ namespace Swix\AmoCrm\Exception;
  * @package Swix\AmoCrm\Exception
  * @author Andrii Vasyliev
  */
-class AuthException extends AmoCrmClientException
+class AuthenticationException extends \RuntimeException
 {
 
 }
