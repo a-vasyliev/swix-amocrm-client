@@ -30,7 +30,8 @@ class Paginator
      * Navigate through standard API structures.
      *
      * @param string $uri
-     * @param array $query
+     * @param array  $query
+     *
      * @return array
      */
     public function paginate(string $uri, array $query = [])
@@ -46,7 +47,7 @@ class Paginator
         while (null === $lastCount || $lastCount == $rowsLimit) {
             $query['limit_offset'] = $offset;
 
-            $response = $httpClient->get($uri . '?' . http_build_query($query));
+            $response = $httpClient->get($uri.'?'.http_build_query($query));
             $responseData = json_decode($response->getBody()->getContents(), true);
 
             if (!isset($responseData['_embedded']['items'])) {
