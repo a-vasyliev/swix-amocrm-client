@@ -36,6 +36,7 @@ class AmoCrmClientTest extends TestCase
     protected function tearDown()
     {
         $this->httpClient = null;
+        $this->mockHandler = null;
         $this->client = null;
     }
 
