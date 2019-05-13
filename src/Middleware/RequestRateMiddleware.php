@@ -21,19 +21,19 @@ class RequestRateMiddleware
 
     public function checkRequestRate(RequestInterface $request)
     {
-        $this->counter++;
+        ++$this->counter;
 
         $now = microtime(true);
         if ($now - $this->firstRequestTime >= 1) {
             $this->counter = 0; // more than a second or empty value
         }
 
-        if ($this->counter == self::RATE_LIMIT) {
+        if (self::RATE_LIMIT == $this->counter) {
             sleep(1);
             $this->counter = 0; // after sleep
         }
 
-        if ($this->counter == 0) {
+        if (0 == $this->counter) {
             $this->firstRequestTime = $now;
         }
 

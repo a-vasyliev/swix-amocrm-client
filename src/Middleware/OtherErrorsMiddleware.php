@@ -9,10 +9,10 @@ use Psr\Http\Message\ResponseInterface;
 class OtherErrorsMiddleware
 {
     const ERROR_CODES = [
-        400  => 'Invalid input data or invalid custom field IDs',
-        402  => 'Subscription has ended',
-        403  => 'Account has been suspended due to high requests per second rate',
-        429  => 'Too high requests per second rate',
+        400 => 'Invalid input data or invalid custom field IDs',
+        402 => 'Subscription has ended',
+        403 => 'Account has been suspended due to high requests per second rate',
+        429 => 'Too high requests per second rate',
         2002 => 'Nothing found by your request',
     ];
 
@@ -25,7 +25,7 @@ class OtherErrorsMiddleware
 
     public function handleErrors(ResponseInterface $response)
     {
-        if ($response->getStatusCode() == 200) {
+        if (200 == $response->getStatusCode()) {
             return $response;
         }
 

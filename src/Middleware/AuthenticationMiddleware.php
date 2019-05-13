@@ -68,7 +68,7 @@ class AuthenticationMiddleware
         $apiKey = $this->getApiKey();
 
         $currentUri = $request->getUri();
-        $divider = strpos($currentUri, '?') === false ? '?' : '&';
+        $divider = false === strpos($currentUri, '?') ? '?' : '&';
 
         $uri = new Uri($currentUri.$divider.http_build_query(['login' => $login, 'api_key' => $apiKey]));
 
@@ -77,7 +77,7 @@ class AuthenticationMiddleware
 
     public function handleErrors(ResponseInterface $response): ResponseInterface
     {
-        if ($response->getStatusCode() == 200) {
+        if (200 == $response->getStatusCode()) {
             return $response;
         }
 
