@@ -50,8 +50,7 @@ class Paginator
             $responseData = json_decode($response->getBody()->getContents(), true);
 
             if (!isset($responseData['_embedded']['items'])) {
-                $lastCount = 0;
-                break;
+                return $data;
             }
 
             $data = array_merge($data, $responseData['_embedded']['items']);
