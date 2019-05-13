@@ -1,11 +1,5 @@
-preset: symfony
+preset: psr2
 
 finder:
   exclude:
     - "tests"
-
-enabled:
-  - ordered_use
-
-disabled:
-  - phpdoc_annotation_without_dot
