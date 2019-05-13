@@ -47,7 +47,7 @@ class Paginator implements PaginatorInterface
         while (null === $lastCount || $lastCount == $rowsLimit) {
             $query['limit_offset'] = $offset;
 
-            $response = $httpClient->get($uri.'?'.http_build_query($query));
+            $response = $httpClient->get($uri . '?' . http_build_query($query));
             $responseData = json_decode($response->getBody()->getContents(), true);
 
             if (!isset($responseData['_embedded']['items'])) {

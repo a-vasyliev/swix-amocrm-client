@@ -41,7 +41,7 @@ class OtherErrorsMiddleware
 
         $message = 'Unknown error with AmoCRM API';
         if (isset($data['response']['error'])) {
-            $message .= ': '.$data['response']['error'];
+            $message .= ': ' . $data['response']['error'];
         }
 
         throw new \RuntimeException($message, $errorCode);

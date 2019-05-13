@@ -71,7 +71,7 @@ class PaginatorTest extends TestCase
 
     public function testPaginateBelowLimit()
     {
-        $items = $this->getItems(self::LIMIT-3);
+        $items = $this->getItems(self::LIMIT - 3);
         $this->mockHandler->append(new Response(200, [], json_encode(['_embedded' => ['items' => $items]])));
 
         $actual = $expected = [];

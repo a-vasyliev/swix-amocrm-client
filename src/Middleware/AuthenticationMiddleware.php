@@ -70,7 +70,7 @@ class AuthenticationMiddleware
         $currentUri = $request->getUri();
         $divider = false === strpos($currentUri, '?') ? '?' : '&';
 
-        $uri = new Uri($currentUri.$divider.http_build_query(['login' => $login, 'api_key' => $apiKey]));
+        $uri = new Uri($currentUri . $divider . http_build_query(['login' => $login, 'api_key' => $apiKey]));
 
         return \GuzzleHttp\Psr7\modify_request($request, ['uri' => $uri]);
     }
