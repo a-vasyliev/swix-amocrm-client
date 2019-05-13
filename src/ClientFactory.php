@@ -7,8 +7,9 @@ use GuzzleHttp\HandlerStack;
 use Swix\AmoCrm\Middleware\AuthenticationMiddleware;
 use Swix\AmoCrm\Middleware\OtherErrorsMiddleware;
 use Swix\AmoCrm\Middleware\RequestRateMiddleware;
+use Swix\AmoCrm\Paginator\Paginator;
 
-class Client
+class ClientFactory
 {
     public static function create(string $apiUrl, string $login, string $apiKey, $proxy = null): AmoCrmClient
     {

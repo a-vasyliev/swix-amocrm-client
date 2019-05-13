@@ -9,7 +9,7 @@ use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
-use Swix\AmoCrm\Paginator;
+use Swix\AmoCrm\Paginator\Paginator;
 
 class PaginatorTest extends TestCase
 {

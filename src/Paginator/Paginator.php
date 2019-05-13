@@ -1,6 +1,6 @@
 <?php
 
-namespace Swix\AmoCrm;
+namespace Swix\AmoCrm\Paginator;
 
 class Paginator implements PaginatorInterface
 {

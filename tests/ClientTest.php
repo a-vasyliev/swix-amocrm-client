@@ -3,13 +3,13 @@
 namespace Swix\AmoCrm\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Swix\AmoCrm\Client;
+use Swix\AmoCrm\ClientFactory;
 
 class ClientTest extends TestCase
 {
     public function testCreate()
     {
-        $client = Client::create('test', 'test', 'test');
+        $client = ClientFactory::create('test', 'test', 'test');
         $this->assertInstanceOf('\Swix\AmoCrm\AmoCrmClient', $client);
     }
 }

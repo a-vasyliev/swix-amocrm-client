@@ -10,7 +10,7 @@ use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 
 use Swix\AmoCrm\AmoCrmClient;
-use Swix\AmoCrm\Paginator;
+use Swix\AmoCrm\Paginator\Paginator;
 
 /**
  * Class ClientTest.
