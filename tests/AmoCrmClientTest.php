@@ -6,8 +6,11 @@ use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
+
 use PHPUnit\Framework\TestCase;
+
 use Swix\AmoCrm\AmoCrmClient;
+use Swix\AmoCrm\Paginator;
 
 /**
  * Class ClientTest.
@@ -30,7 +33,7 @@ class AmoCrmClientTest extends TestCase
         $this->mockHandler = new MockHandler();
         $this->httpClient = new HttpClient(['handler' => HandlerStack::create($this->mockHandler)]);
 
-        $this->client = new AmoCrmClient($this->httpClient);
+        $this->client = new AmoCrmClient($this->httpClient, new Paginator($this->httpClient));
     }
 
     protected function tearDown()

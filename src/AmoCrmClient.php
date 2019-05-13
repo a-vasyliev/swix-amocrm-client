@@ -22,12 +22,17 @@ class AmoCrmClient
     /** @var HttpClient */
     protected $httpClient;
 
+    /** @var PaginatorInterface */
+    protected $paginator;
+
     /**
      * @param HttpClient $httpClient
+     * @param PaginatorInterface $paginator
      */
-    public function __construct(HttpClient $httpClient)
+    public function __construct(HttpClient $httpClient, PaginatorInterface $paginator)
     {
         $this->httpClient = $httpClient;
+        $this->paginator  = $paginator;
     }
 
     /**
@@ -39,19 +44,28 @@ class AmoCrmClient
     }
 
     /**
+     * @return PaginatorInterface
+     */
+    protected function getPaginator()
+    {
+        return $this->paginator;
+    }
+
+    /**
      * @param array $scopes
      * @param bool  $freeUsers
      *
      * @return array Account information
      */
-    public function getAccount(array $scopes = self::SCOPE_TYPES, $freeUsers = true)
+    public function getAccount(array $scopes = self::SCOPE_TYPES, $freeUsers = true): array
     {
         $httpClient = $this->getHttpClient();
 
         Assert::allOneOf($scopes, self::SCOPE_TYPES, 'Invalid scopes given');
 
         $response = $httpClient->get(
-            '/api/v2/account?with='.implode(',', $scopes).'&free_users='.($freeUsers ? 'Y' : 'N')
+            '/api/v2/account?'
+            . http_build_query(['with' => implode(',', $scopes), 'free_users' => $freeUsers ? 'Y' : 'N'])
         );
 
         return json_decode($response->getBody()->getContents(), true);

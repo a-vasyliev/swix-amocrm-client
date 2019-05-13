@@ -10,5 +10,5 @@ interface PaginatorInterface
 
     public function getRowsLimit(): int;
 
-    public function paginate(string $uri, array $query = []);
+    public function paginate(string $uri, array $query = []): array;
 }

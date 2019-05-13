@@ -3,6 +3,7 @@
 namespace Swix\AmoCrm;
 
 use GuzzleHttp\HandlerStack;
+
 use Swix\AmoCrm\Middleware\AuthenticationMiddleware;
 use Swix\AmoCrm\Middleware\OtherErrorsMiddleware;
 use Swix\AmoCrm\Middleware\RequestRateMiddleware;
@@ -27,6 +28,6 @@ class Client
             'handler' => $handler,
         ]);
 
-        return new AmoCrmClient($client);
+        return new AmoCrmClient($client, new Paginator($client));
     }
 }

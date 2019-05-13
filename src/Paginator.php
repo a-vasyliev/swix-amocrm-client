@@ -2,7 +2,7 @@
 
 namespace Swix\AmoCrm;
 
-class Paginator
+class Paginator implements PaginatorInterface
 {
     /** @var \GuzzleHttp\Client */
     private $httpClient;
@@ -34,7 +34,7 @@ class Paginator
      *
      * @return array
      */
-    public function paginate(string $uri, array $query = [])
+    public function paginate(string $uri, array $query = []): array
     {
         $httpClient = $this->getHttpClient();
         $rowsLimit = $this->getRowsLimit();
