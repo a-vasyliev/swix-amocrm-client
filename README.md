@@ -13,7 +13,7 @@ Swix AmoCRM Client
 - Advanced error reporting and data validation
 
 ## The Plan
-Work is actively in progress. What is expected in nearest future:
+Work is actively in progress. What is expected in the nearest future:
 - Account information
 - Leads (with pipeline_id support)
 - Contacts (with working lead IDs)
