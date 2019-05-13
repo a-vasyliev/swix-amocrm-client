@@ -94,7 +94,6 @@ class AmoCrmClient
             if (isset($params['filter']['date_modify'])) {
                 $this->assertLeadsFilterDate($params['filter']['date_modify']);
             }
-
         }
 
         $httpClient = $this->getHttpClient();
