@@ -2,15 +2,16 @@
 
 namespace Swix\AmoCrm\Entity;
 
+use Swix\AmoCrm\Entity\Traits\BasicEntityTrait;
+use Swix\AmoCrm\Entity\Traits\CompanyTrait;
+
 class Contact
 {
     use BasicEntityTrait;
+    use CompanyTrait;
 
     /** @var string */
     protected $name;
-
-    /** @var array */
-    protected $company; // id, name -- Trait?
 
     /** @var array */
     protected $leadIds;

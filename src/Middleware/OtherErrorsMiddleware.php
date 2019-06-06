@@ -25,7 +25,7 @@ class OtherErrorsMiddleware
 
     public function handleErrors(ResponseInterface $response)
     {
-        if (200 == $response->getStatusCode()) {
+        if (in_array($response->getStatusCode(), [200, 204])) {
             return $response;
         }
 

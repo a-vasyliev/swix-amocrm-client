@@ -4,10 +4,10 @@ namespace Swix\AmoCrm;
 
 use GuzzleHttp\HandlerStack;
 
+use Swix\AmoCrm\Hydrator\HydratorManager;
 use Swix\AmoCrm\Middleware\AuthenticationMiddleware;
 use Swix\AmoCrm\Middleware\OtherErrorsMiddleware;
 use Swix\AmoCrm\Middleware\RequestRateMiddleware;
-use Swix\AmoCrm\Paginator\Paginator;
 
 class ClientFactory
 {
@@ -29,6 +29,6 @@ class ClientFactory
             'handler' => $handler,
         ]);
 
-        return new AmoCrmClient($client, new Paginator($client));
+        return new AmoCrmClient($client, new HydratorManager());
     }
 }

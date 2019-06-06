@@ -1,0 +1,952 @@
+{
+  "_links": {
+    "self": {
+      "href": "\/api\/v2\/leads?query=sensitive_data&limit_rows=10&limit_offset=0&login=sensitive_login&api_key=sensitive_api_key",
+      "method": "get"
+    }
+  },
+  "_embedded": {
+    "items": [
+      {
+        "id": 197077,
+        "name": "Some Lead #1",
+        "responsible_user_id": 3445639,
+        "created_by": 3445480,
+        "created_at": 1557133243,
+        "updated_at": 1557478438,
+        "account_id": 26925145,
+        "pipeline_id": 1767781,
+        "status_id": 26925160,
+        "is_deleted": false,
+        "main_contact": {
+          "id": 440277,
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/contacts?id=440277",
+              "method": "get"
+            }
+          }
+        },
+        "group_id": 0,
+        "company": {},
+        "closed_at": 0,
+        "closest_task_at": 0,
+        "tags": [
+          {
+            "id": 599,
+            "name": "Tag 1"
+          },
+          {
+            "id": 5263,
+            "name": "Tag 2"
+          }
+        ],
+        "custom_fields": [
+          {
+            "id": 22103,
+            "name": "Message ID",
+            "values": [
+              {
+                "value": "EC#659287068"
+              }
+            ],
+            "is_system": false
+          },
+          {
+            "id": 22073,
+            "name": "Message ID",
+            "values": [
+              {
+                "value": "EC#659287068"
+              }
+            ],
+            "is_system": false
+          },
+          {
+            "id": 22105,
+            "name": "Order ID",
+            "values": [
+              {
+                "value": "EO#1405021632"
+              }
+            ],
+            "is_system": false
+          }
+        ],
+        "contacts": {
+          "id": [
+            440277
+          ],
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/contacts?id=440277",
+              "method": "get"
+            }
+          }
+        },
+        "sale": 0,
+        "loss_reason_id": 0,
+        "pipeline": {
+          "id": 1767781,
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/pipelines?id=1767781",
+              "method": "get"
+            }
+          }
+        },
+        "_links": {
+          "self": {
+            "href": "\/api\/v2\/leads?id=197077",
+            "method": "get"
+          }
+        }
+      },
+      {
+        "id": 243533,
+        "name": "Some Lead #2",
+        "responsible_user_id": 3445639,
+        "created_by": 3445480,
+        "created_at": 1557214239,
+        "updated_at": 1557491526,
+        "account_id": 26925145,
+        "pipeline_id": 1767781,
+        "status_id": 143,
+        "is_deleted": false,
+        "main_contact": {
+          "id": 440277,
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/contacts?id=440277",
+              "method": "get"
+            }
+          }
+        },
+        "group_id": 0,
+        "company": {},
+        "closed_at": 1557491524,
+        "closest_task_at": 0,
+        "tags": [
+          {
+            "id": 599,
+            "name": "Tag 1"
+          },
+          {
+            "id": 5263,
+            "name": "Tag 2"
+          }
+        ],
+        "custom_fields": [
+          {
+            "id": 22103,
+            "name": "Message ID",
+            "values": [
+              {
+                "value": "EC#680364544"
+              }
+            ],
+            "is_system": false
+          },
+          {
+            "id": 22073,
+            "name": "Message ID",
+            "values": [
+              {
+                "value": "EC#680364544"
+              }
+            ],
+            "is_system": false
+          },
+          {
+            "id": 22105,
+            "name": "Order ID",
+            "values": [
+              {
+                "value": "EO#1443751166"
+              }
+            ],
+            "is_system": false
+          }
+        ],
+        "contacts": {
+          "id": [
+            440277
+          ],
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/contacts?id=440277",
+              "method": "get"
+            }
+          }
+        },
+        "sale": 0,
+        "loss_reason_id": 0,
+        "pipeline": {
+          "id": 1767781,
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/pipelines?id=1767781",
+              "method": "get"
+            }
+          }
+        },
+        "_links": {
+          "self": {
+            "href": "\/api\/v2\/leads?id=243533",
+            "method": "get"
+          }
+        }
+      },
+      {
+        "id": 646287,
+        "name": "Some Lead #3",
+        "responsible_user_id": 3445639,
+        "created_by": 3445480,
+        "created_at": 1557818129,
+        "updated_at": 1558088464,
+        "account_id": 26925145,
+        "pipeline_id": 1767781,
+        "status_id": 143,
+        "is_deleted": false,
+        "main_contact": {
+          "id": 440277,
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/contacts?id=440277",
+              "method": "get"
+            }
+          }
+        },
+        "group_id": 0,
+        "company": {},
+        "closed_at": 1558088464,
+        "closest_task_at": 0,
+        "tags": [
+          {
+            "id": 599,
+            "name": "Tag 1"
+          },
+          {
+            "id": 5263,
+            "name": "Tag 2"
+          }
+        ],
+        "custom_fields": [
+          {
+            "id": 22103,
+            "name": "Message ID",
+            "values": [
+              {
+                "value": "EC#677681336"
+              }
+            ],
+            "is_system": false
+          },
+          {
+            "id": 22073,
+            "name": "Message ID",
+            "values": [
+              {
+                "value": "EC#677681336"
+              }
+            ],
+            "is_system": false
+          },
+          {
+            "id": 22105,
+            "name": "Order ID",
+            "values": [
+              {
+                "value": "EO#1444157008"
+              }
+            ],
+            "is_system": false
+          }
+        ],
+        "contacts": {
+          "id": [
+            440277
+          ],
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/contacts?id=440277",
+              "method": "get"
+            }
+          }
+        },
+        "sale": 0,
+        "loss_reason_id": 0,
+        "pipeline": {
+          "id": 1767781,
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/pipelines?id=1767781",
+              "method": "get"
+            }
+          }
+        },
+        "_links": {
+          "self": {
+            "href": "\/api\/v2\/leads?id=646287",
+            "method": "get"
+          }
+        }
+      },
+      {
+        "id": 2864729,
+        "name": "Some Lead #4",
+        "responsible_user_id": 3445639,
+        "created_by": 3445480,
+        "created_at": 1559738429,
+        "updated_at": 1559743709,
+        "account_id": 26925145,
+        "pipeline_id": 1767781,
+        "status_id": 142,
+        "is_deleted": false,
+        "main_contact": {
+          "id": 440277,
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/contacts?id=440277",
+              "method": "get"
+            }
+          }
+        },
+        "group_id": 0,
+        "company": {},
+        "closed_at": 1559743707,
+        "closest_task_at": 0,
+        "tags": [
+          {
+            "id": 599,
+            "name": "Tag 1"
+          },
+          {
+            "id": 5263,
+            "name": "Tag 2"
+          }
+        ],
+        "custom_fields": [
+          {
+            "id": 22103,
+            "name": "Message ID",
+            "values": [
+              {
+                "value": "EC#708949643"
+              }
+            ],
+            "is_system": false
+          },
+          {
+            "id": 22073,
+            "name": "Message ID",
+            "values": [
+              {
+                "value": "EC#708949643"
+              }
+            ],
+            "is_system": false
+          },
+          {
+            "id": 22105,
+            "name": "Order ID",
+            "values": [
+              {
+                "value": "EO#1460727866"
+              }
+            ],
+            "is_system": false
+          }
+        ],
+        "contacts": {
+          "id": [
+            440277
+          ],
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/contacts?id=440277",
+              "method": "get"
+            }
+          }
+        },
+        "sale": 3189,
+        "loss_reason_id": 0,
+        "pipeline": {
+          "id": 1767781,
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/pipelines?id=1767781",
+              "method": "get"
+            }
+          }
+        },
+        "_links": {
+          "self": {
+            "href": "\/api\/v2\/leads?id=2864729",
+            "method": "get"
+          }
+        }
+      },
+      {
+        "id": 2795881,
+        "name": "Some Lead #5",
+        "responsible_user_id": 3445639,
+        "created_by": 3445480,
+        "created_at": 1559711481,
+        "updated_at": 1559802929,
+        "account_id": 26925145,
+        "pipeline_id": 1767781,
+        "status_id": 26925160,
+        "is_deleted": false,
+        "main_contact": {
+          "id": 8670217,
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/contacts?id=8670217",
+              "method": "get"
+            }
+          }
+        },
+        "group_id": 0,
+        "company": {},
+        "closed_at": 0,
+        "closest_task_at": 1560062429,
+        "tags": [
+          {
+            "id": 599,
+            "name": "Tag 1"
+          },
+          {
+            "id": 5263,
+            "name": "Tag 2"
+          }
+        ],
+        "custom_fields": [
+          {
+            "id": 22105,
+            "name": "Order ID",
+            "values": [
+              {
+                "value": "EO#1460666720"
+              }
+            ],
+            "is_system": false
+          },
+          {
+            "id": 22103,
+            "name": "Message ID",
+            "values": [
+              {
+                "value": "EC#687065780"
+              }
+            ],
+            "is_system": false
+          },
+          {
+            "id": 22073,
+            "name": "Message ID",
+            "values": [
+              {
+                "value": "EC#687065780"
+              }
+            ],
+            "is_system": false
+          }
+        ],
+        "contacts": {
+          "id": [
+            8670217
+          ],
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/contacts?id=8670217",
+              "method": "get"
+            }
+          }
+        },
+        "sale": 1365,
+        "loss_reason_id": 0,
+        "pipeline": {
+          "id": 1767781,
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/pipelines?id=1767781",
+              "method": "get"
+            }
+          }
+        },
+        "_links": {
+          "self": {
+            "href": "\/api\/v2\/leads?id=2795881",
+            "method": "get"
+          }
+        }
+      },
+      {
+        "id": 2948147,
+        "name": "Some Lead #6",
+        "responsible_user_id": 3445639,
+        "created_by": 3445480,
+        "created_at": 1559778685,
+        "updated_at": 1559802931,
+        "account_id": 26925145,
+        "pipeline_id": 1767781,
+        "status_id": 26925160,
+        "is_deleted": false,
+        "main_contact": {
+          "id": 9023275,
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/contacts?id=9023275",
+              "method": "get"
+            }
+          }
+        },
+        "group_id": 0,
+        "company": {},
+        "closed_at": 0,
+        "closest_task_at": 1560062430,
+        "tags": [
+          {
+            "id": 599,
+            "name": "Tag 1"
+          },
+          {
+            "id": 5263,
+            "name": "Tag 2"
+          }
+        ],
+        "custom_fields": [
+          {
+            "id": 22105,
+            "name": "Order ID",
+            "values": [
+              {
+                "value": "EO#1469992059"
+              }
+            ],
+            "is_system": false
+          },
+          {
+            "id": 22103,
+            "name": "Message ID",
+            "values": [
+              {
+                "value": "EC#687324916"
+              }
+            ],
+            "is_system": false
+          },
+          {
+            "id": 22073,
+            "name": "Message ID",
+            "values": [
+              {
+                "value": "EC#687324916"
+              }
+            ],
+            "is_system": false
+          }
+        ],
+        "contacts": {
+          "id": [
+            9023275
+          ],
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/contacts?id=9023275",
+              "method": "get"
+            }
+          }
+        },
+        "sale": 2945,
+        "loss_reason_id": 0,
+        "pipeline": {
+          "id": 1767781,
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/pipelines?id=1767781",
+              "method": "get"
+            }
+          }
+        },
+        "_links": {
+          "self": {
+            "href": "\/api\/v2\/leads?id=2948147",
+            "method": "get"
+          }
+        }
+      },
+      {
+        "id": 2949909,
+        "name": "Some Lead #7",
+        "responsible_user_id": 3445639,
+        "created_by": 3445480,
+        "created_at": 1559795472,
+        "updated_at": 1559802936,
+        "account_id": 26925145,
+        "pipeline_id": 1767781,
+        "status_id": 26925160,
+        "is_deleted": false,
+        "main_contact": {
+          "id": 9025387,
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/contacts?id=9025387",
+              "method": "get"
+            }
+          }
+        },
+        "group_id": 0,
+        "company": {},
+        "closed_at": 0,
+        "closest_task_at": 1560062436,
+        "tags": [
+          {
+            "id": 599,
+            "name": "Tag 1"
+          },
+          {
+            "id": 5263,
+            "name": "Tag 2"
+          }
+        ],
+        "custom_fields": [
+          {
+            "id": 22105,
+            "name": "Order ID",
+            "values": [
+              {
+                "value": "EO#1461093716"
+              }
+            ],
+            "is_system": false
+          },
+          {
+            "id": 22103,
+            "name": "Message ID",
+            "values": [
+              {
+                "value": "EC#687325000"
+              }
+            ],
+            "is_system": false
+          },
+          {
+            "id": 22073,
+            "name": "Message ID",
+            "values": [
+              {
+                "value": "EC#687325000"
+              }
+            ],
+            "is_system": false
+          }
+        ],
+        "contacts": {
+          "id": [
+            9025387
+          ],
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/contacts?id=9025387",
+              "method": "get"
+            }
+          }
+        },
+        "sale": 3127,
+        "loss_reason_id": 0,
+        "pipeline": {
+          "id": 1767781,
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/pipelines?id=1767781",
+              "method": "get"
+            }
+          }
+        },
+        "_links": {
+          "self": {
+            "href": "\/api\/v2\/leads?id=2949909",
+            "method": "get"
+          }
+        }
+      },
+      {
+        "id": 1715365,
+        "name": "Some Lead #8",
+        "responsible_user_id": 3445639,
+        "created_by": 3445480,
+        "created_at": 1558720238,
+        "updated_at": 1559805329,
+        "account_id": 26925145,
+        "pipeline_id": 1767781,
+        "status_id": 26925160,
+        "is_deleted": false,
+        "main_contact": {
+          "id": 4531505,
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/contacts?id=4531505",
+              "method": "get"
+            }
+          }
+        },
+        "group_id": 0,
+        "company": {},
+        "closed_at": 0,
+        "closest_task_at": 1560064829,
+        "tags": [
+          {
+            "id": 599,
+            "name": "Tag 1"
+          },
+          {
+            "id": 5263,
+            "name": "Tag 2"
+          }
+        ],
+        "custom_fields": [
+          {
+            "id": 22105,
+            "name": "Order ID",
+            "values": [
+              {
+                "value": "EO#1456025644"
+              }
+            ],
+            "is_system": false
+          },
+          {
+            "id": 22103,
+            "name": "Message ID",
+            "values": [
+              {
+                "value": "EC#706795865"
+              }
+            ],
+            "is_system": false
+          },
+          {
+            "id": 22073,
+            "name": "Message ID",
+            "values": [
+              {
+                "value": "EC#706795865"
+              }
+            ],
+            "is_system": false
+          }
+        ],
+        "contacts": {
+          "id": [
+            4531505
+          ],
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/contacts?id=4531505",
+              "method": "get"
+            }
+          }
+        },
+        "sale": 1520,
+        "loss_reason_id": 0,
+        "pipeline": {
+          "id": 1767781,
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/pipelines?id=1767781",
+              "method": "get"
+            }
+          }
+        },
+        "_links": {
+          "self": {
+            "href": "\/api\/v2\/leads?id=1715365",
+            "method": "get"
+          }
+        }
+      },
+      {
+        "id": 1617281,
+        "name": "Some Lead #9",
+        "responsible_user_id": 3445639,
+        "created_by": 3445480,
+        "created_at": 1558640440,
+        "updated_at": 1559805336,
+        "account_id": 26925145,
+        "pipeline_id": 1767781,
+        "status_id": 26925160,
+        "is_deleted": false,
+        "main_contact": {
+          "id": 4313185,
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/contacts?id=4313185",
+              "method": "get"
+            }
+          }
+        },
+        "group_id": 0,
+        "company": {},
+        "closed_at": 0,
+        "closest_task_at": 1560064835,
+        "tags": [
+          {
+            "id": 599,
+            "name": "Tag 1"
+          },
+          {
+            "id": 5263,
+            "name": "Tag 2"
+          }
+        ],
+        "custom_fields": [
+          {
+            "id": 22105,
+            "name": "Order ID",
+            "values": [
+              {
+                "value": "EO#1455681682"
+              }
+            ],
+            "is_system": false
+          },
+          {
+            "id": 22103,
+            "name": "Message ID",
+            "values": [
+              {
+                "value": "EC#706259353"
+              }
+            ],
+            "is_system": false
+          },
+          {
+            "id": 22073,
+            "name": "Message ID",
+            "values": [
+              {
+                "value": "EC#706259353"
+              }
+            ],
+            "is_system": false
+          }
+        ],
+        "contacts": {
+          "id": [
+            4313185
+          ],
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/contacts?id=4313185",
+              "method": "get"
+            }
+          }
+        },
+        "sale": 4481,
+        "loss_reason_id": 0,
+        "pipeline": {
+          "id": 1767781,
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/pipelines?id=1767781",
+              "method": "get"
+            }
+          }
+        },
+        "_links": {
+          "self": {
+            "href": "\/api\/v2\/leads?id=1617281",
+            "method": "get"
+          }
+        }
+      },
+      {
+        "id": 2164385,
+        "name": "Some Lead #10",
+        "responsible_user_id": 3445639,
+        "created_by": 3445480,
+        "created_at": 1559228721,
+        "updated_at": 1559806127,
+        "account_id": 26925145,
+        "pipeline_id": 1767781,
+        "status_id": 143,
+        "is_deleted": false,
+        "main_contact": {
+          "id": 7228773,
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/contacts?id=7228773",
+              "method": "get"
+            }
+          }
+        },
+        "group_id": 0,
+        "company": {},
+        "closed_at": 1559806125,
+        "closest_task_at": 0,
+        "tags": [
+          {
+            "id": 599,
+            "name": "Tag 1"
+          },
+          {
+            "id": 5263,
+            "name": "Tag 2"
+          }
+        ],
+        "custom_fields": [
+          {
+            "id": 22103,
+            "name": "Message ID",
+            "values": [
+              {
+                "value": "EC#685755326"
+              }
+            ],
+            "is_system": false
+          },
+          {
+            "id": 22073,
+            "name": "Message ID",
+            "values": [
+              {
+                "value": "EC#685755326"
+              }
+            ],
+            "is_system": false
+          }
+        ],
+        "contacts": {
+          "id": [
+            7228773
+          ],
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/contacts?id=7228773",
+              "method": "get"
+            }
+          }
+        },
+        "sale": 0,
+        "loss_reason_id": 2681422,
+        "pipeline": {
+          "id": 1767781,
+          "_links": {
+            "self": {
+              "href": "\/api\/v2\/pipelines?id=1767781",
+              "method": "get"
+            }
+          }
+        },
+        "_links": {
+          "self": {
+            "href": "\/api\/v2\/leads?id=2164385",
+            "method": "get"
+          }
+        }
+      }
+    ]
+  }
+}

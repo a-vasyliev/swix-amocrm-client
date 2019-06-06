@@ -1,6 +1,6 @@
 <?php
 
-namespace Swix\AmoCrm\Entity;
+namespace Swix\AmoCrm\Entity\Traits;
 
 trait BasicEntityTrait
 {
@@ -10,13 +10,13 @@ trait BasicEntityTrait
     /** @var int */
     protected $responsibleUserId;
 
-    /** @var \DateTime */
+    /** @var int */
     protected $createdAt;
 
     /** @var int */
     protected $createdBy;
 
-    /** @var \DateTime */
+    /** @var int */
     protected $updatedAt;
 
     /** @var int */
@@ -70,9 +70,9 @@ trait BasicEntityTrait
     }
 
     /**
-     * @return \DateTime
+     * @return int
      */
-    public function getCreatedAt()
+    public function getCreatedAt(): int
     {
         return $this->createdAt;
     }
@@ -89,17 +89,28 @@ trait BasicEntityTrait
     }
 
     /**
+     * @param int $createdBy
+     * @return BasicEntityTrait
+     */
+    public function setCreatedBy(int $createdBy): self
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
      * @return int
      */
-    public function getCreatedBy()
+    public function getCreatedBy(): int
     {
         return $this->createdBy;
     }
 
     /**
-     * @return \DateTime
+     * @return int
      */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): int
     {
         return $this->updatedAt;
     }

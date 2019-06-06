@@ -2,6 +2,8 @@
 
 namespace Swix\AmoCrm\Entity;
 
+use Swix\AmoCrm\Entity\Traits\BasicEntityTrait;
+
 class Note
 {
     use BasicEntityTrait;

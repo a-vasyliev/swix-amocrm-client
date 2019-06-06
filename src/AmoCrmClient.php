@@ -3,7 +3,7 @@
 namespace Swix\AmoCrm;
 
 use GuzzleHttp\Client as HttpClient;
-use Swix\AmoCrm\Paginator\PaginatorInterface;
+use Swix\AmoCrm\Hydrator\HydratorManager;
 use Webmozart\Assert\Assert;
 
 /**
@@ -18,20 +18,22 @@ class AmoCrmClient
     const LEADS_PARAMS = ['id', 'query', 'responsible_user_id', 'with', 'status', 'filter'];
     const LEADS_WITH = ['is_price_modified_by_robot', 'loss_reason_name'];
 
+    const ITEMS_PER_PAGE = 500;
+
     /** @var HttpClient */
     protected $httpClient;
 
-    /** @var PaginatorInterface */
-    protected $paginator;
+    /** @var HydratorManager */
+    protected $hydratorManager;
 
     /**
      * @param HttpClient $httpClient
-     * @param PaginatorInterface $paginator
+     * @param HydratorManager $manager
      */
-    public function __construct(HttpClient $httpClient, PaginatorInterface $paginator)
+    public function __construct(HttpClient $httpClient, HydratorManager $manager)
     {
-        $this->httpClient = $httpClient;
-        $this->paginator  = $paginator;
+        $this->httpClient      = $httpClient;
+        $this->hydratorManager = $manager;
     }
 
     /**
@@ -42,12 +44,62 @@ class AmoCrmClient
         return $this->httpClient;
     }
 
+
     /**
-     * @return PaginatorInterface
+     * @return HydratorManager
      */
-    protected function getPaginator()
+    protected function getHydratorManager()
     {
-        return $this->paginator;
+        return $this->hydratorManager;
+    }
+
+    /**
+     * Navigate through standard API structures.
+     *
+     * @param string $uri
+     * @param array $query
+     * @param int $limit
+     * @param int $offset
+     *
+     * @return array
+     */
+    protected function paginate(string $uri, array $query = [], int $limit = null): array
+    {
+        Assert::nullOrNotEq($limit, 0);
+
+        $httpClient = $this->getHttpClient();
+
+        $data = [];
+        $smallestLimit = isset($limit) && $limit < self::ITEMS_PER_PAGE ? $limit : self::ITEMS_PER_PAGE;
+        $query['limit_rows'] = $smallestLimit;
+        $lastCount = $offset = 0;
+
+        while ($offset == 0 || $lastCount == $smallestLimit) {
+            $query['limit_offset'] = $offset;
+
+            // low down the option to get not more than provided limit
+            if (isset($limit) && $limit - $offset < $query['limit_rows']) {
+                $query['limit_rows'] = $limit - $offset;
+            }
+
+            $response = $httpClient->get($uri . '?' . http_build_query($query));
+            $responseData = json_decode($response->getBody()->getContents(), true);
+
+            if (!isset($responseData['_embedded']['items'])) {
+                return $data;
+            }
+
+            $data = array_merge($data, $responseData['_embedded']['items']);
+
+            $lastCount = count($responseData['_embedded']['items']);
+            $offset += $lastCount;
+
+            if (isset($limit) && $limit - $offset == 0) {
+                return $data; // limit is fulfilled
+            }
+        }
+
+        return $data;
     }
 
     /**
@@ -74,11 +126,11 @@ class AmoCrmClient
     {
         Assert::false(
             !isset($date['from']) && !isset($date['to']),
-            '"from" or "to" parameter is required'
+            'At least one of "from" or "to" parameters is required'
         );
     }
 
-    public function getLeads(array $params): array
+    public function getLeads(array $params = [], int $limit = null): array
     {
         Assert::allOneOf(array_keys($params), self::LEADS_PARAMS);
 
@@ -96,7 +148,9 @@ class AmoCrmClient
             }
         }
 
-        $httpClient = $this->getHttpClient();
-        $data = $this->getPaginator()->paginate('/api/v2/leads', $params);
+        $data = $this->paginate('/api/v2/leads', $params, $limit);
+        $hydrator = $this->getHydratorManager()->getHydrator('\Swix\AmoCrm\Entity\Lead');
+
+        return $hydrator->hydrateRows($data);
     }
 }
