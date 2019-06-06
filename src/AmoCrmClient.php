@@ -59,7 +59,6 @@ class AmoCrmClient
      * @param string $uri
      * @param array $query
      * @param int $limit
-     * @param int $offset
      *
      * @return array
      */
