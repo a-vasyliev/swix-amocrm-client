@@ -57,6 +57,19 @@ class AmoCrmClientTest extends TestCase
         $this->assertEquals(['test' => 'ok'], $data);
     }
 
+    public function testGetLeadsNoData()
+    {
+        $this->mockHandler->append(new Response(
+            200,
+            [],
+            '{}'
+        ));
+
+        $data = $this->client->getLeads(['query' => 'does not matter']);
+
+        $this->assertCount(0, $data);
+    }
+
     public function testGetLeadsOk()
     {
         $this->mockHandler->append(new Response(
