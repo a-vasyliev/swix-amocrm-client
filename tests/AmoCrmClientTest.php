@@ -83,10 +83,6 @@ class AmoCrmClientTest extends TestCase
         $this->assertCount(10, $data);
     }
 
-    /**
-     * Provide 10 results, but set the limit higher.
-     * There must not be a second API call, because we have smaller rows count than given limit.
-     */
     public function testGetLeadsBelowLimit()
     {
         $this->mockHandler->append(new Response(
@@ -100,10 +96,6 @@ class AmoCrmClientTest extends TestCase
         $this->assertCount(10, $data);
     }
 
-    /**
-     * Provide 10 results, but set the limit equal.
-     * There must not be a second API call, because we have fulfilled limit.
-     */
     public function testGetLeadsEqLimit()
     {
         $this->mockHandler->append(new Response(
@@ -115,5 +107,54 @@ class AmoCrmClientTest extends TestCase
         $data = $this->client->getLeads(['query' => 'does not matter'], 10);
 
         $this->assertCount(10, $data);
+    }
+
+    public function testGetLeadsAboveLimit()
+    {
+        $resourceData = json_decode(file_get_contents('./tests/resources/lead/lead_ok.json'), true);
+        $resourceData = array_chunk($resourceData['_embedded']['items'], 5);
+
+        $this->mockHandler->append(new Response(
+            200,
+            [],
+            json_encode(['_embedded' => ['items' => $resourceData[0]]])
+        ));
+
+        unset($resourceData[1][count($resourceData[1]) - 1]);
+
+        $this->mockHandler->append(new Response(
+            200,
+            [],
+            json_encode(['_embedded' => ['items' => $resourceData[1]]])
+        ));
+
+        $this->client->setPageLimit(5);
+        $data = $this->client->getLeads(['query' => 'does not matter'], 9);
+
+        $this->assertCount(9, $data);
+    }
+
+    public function testGetLeadsWrongParam()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->client->getLeads(['wrong_param' => 'whatever']);
+    }
+
+    public function testGetLeadsWrongWith()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->client->getLeads(['with' => 'whatever']);
+    }
+
+    public function testGetLeadsWrongFilterDateCreate()
+    {
+        $this->expectException(\OutOfBoundsException::class);
+        $this->client->getLeads(['filter' => ['date_create' => ['from' => 1]]]);
+    }
+
+    public function testGetLeadsWrongFilterDateModify()
+    {
+        $this->expectException(\OutOfBoundsException::class);
+        $this->client->getLeads(['filter' => ['date_modify' => ['to' => 1]]]);
     }
 }

@@ -18,7 +18,8 @@ class AmoCrmClient
     const LEADS_PARAMS = ['id', 'query', 'responsible_user_id', 'with', 'status', 'filter'];
     const LEADS_WITH = ['is_price_modified_by_robot', 'loss_reason_name'];
 
-    const ITEMS_PER_PAGE = 500;
+    /** @var int */
+    protected $pageLimit = 500;
 
     /** @var HttpClient */
     protected $httpClient;
@@ -54,6 +55,25 @@ class AmoCrmClient
     }
 
     /**
+     * @param int $limit
+     * @return $this
+     */
+    public function setPageLimit(int $limit): self
+    {
+        $this->pageLimit = $limit;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPageLimit(): int
+    {
+        return $this->pageLimit;
+    }
+
+    /**
      * Navigate through standard API structures.
      *
      * @param string $uri
@@ -69,7 +89,8 @@ class AmoCrmClient
         $httpClient = $this->getHttpClient();
 
         $data = [];
-        $smallestLimit = isset($limit) && $limit < self::ITEMS_PER_PAGE ? $limit : self::ITEMS_PER_PAGE;
+        $pageLimit = $this->getPageLimit();
+        $smallestLimit = isset($limit) && $limit < $pageLimit ? $limit : $pageLimit;
         $query['limit_rows'] = $smallestLimit;
         $lastCount = $offset = 0;
 
