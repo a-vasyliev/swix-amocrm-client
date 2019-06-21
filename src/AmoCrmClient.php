@@ -3,6 +3,7 @@
 namespace Swix\AmoCrm;
 
 use GuzzleHttp\Client as HttpClient;
+use Swix\AmoCrm\Entity\Contact;
 use Swix\AmoCrm\Entity\Lead;
 use Swix\AmoCrm\Extractor\ExtractorManager;
 use Swix\AmoCrm\Hydrator\HydratorManager;
@@ -19,6 +20,8 @@ class AmoCrmClient
 
     const LEADS_PARAMS = ['id', 'query', 'responsible_user_id', 'with', 'status', 'filter'];
     const LEADS_WITH = ['is_price_modified_by_robot', 'loss_reason_name'];
+
+    const CONTACTS_PARAMS = ['id', 'query', 'responsible_user_id'];
 
     /** @var int */
     protected $pageLimit = 500;
@@ -37,8 +40,11 @@ class AmoCrmClient
      * @param HydratorManager $hydratorManager
      * @param ExtractorManager $extractorManager
      */
-    public function __construct(HttpClient $httpClient, HydratorManager $hydratorManager, ExtractorManager $extractorManager)
-    {
+    public function __construct(
+        HttpClient $httpClient,
+        HydratorManager $hydratorManager,
+        ExtractorManager $extractorManager
+    ) {
         $this->httpClient       = $httpClient;
         $this->hydratorManager  = $hydratorManager;
         $this->extractorManager = $extractorManager;
@@ -210,6 +216,11 @@ class AmoCrmClient
         );
     }
 
+    /**
+     * @param array $params
+     * @param int|null $limit
+     * @return Lead[]
+     */
     public function getLeads(array $params = [], int $limit = null): array
     {
         Assert::allOneOf(array_keys($params), self::LEADS_PARAMS);
@@ -238,5 +249,26 @@ class AmoCrmClient
     public function addOrUpdateLeads(array $leads)
     {
         return $this->post('/api/v2/leads', $leads);
+    }
+
+    /**
+     * @param array $params
+     * @param int|null $limit
+     * @return Contact[]
+     */
+    public function getContacts(array $params = [], int $limit = null): array
+    {
+        Assert::allOneOf(array_keys($params), self::CONTACTS_PARAMS);
+
+        return $this->paginate('/api/v2/contacts', '\Swix\AmoCrm\Entity\Contact', $params, $limit);
+    }
+
+    /**
+     * @param Contact[] $leads
+     * @return Contact[]
+     */
+    public function addOrUpdateContacts(array $leads)
+    {
+        return $this->post('/api/v2/contacts', $leads);
     }
 }
