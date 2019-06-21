@@ -22,7 +22,7 @@ class HydratorManager
         }
     }
 
-    public function getHydrator(string $entityClassName): HydratorInterface
+    public function get(string $entityClassName): HydratorInterface
     {
         if (isset($this->hydrators[$entityClassName])) {
             return $this->hydrators[$entityClassName];

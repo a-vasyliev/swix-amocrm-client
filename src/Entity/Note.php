@@ -2,12 +2,8 @@
 
 namespace Swix\AmoCrm\Entity;
 
-use Swix\AmoCrm\Entity\Traits\BasicEntityTrait;
-
-class Note
+class Note extends AbstractEntity
 {
-    use BasicEntityTrait;
-
     /** @var bool */
     private $isEditable;
 

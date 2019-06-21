@@ -2,12 +2,8 @@
 
 namespace Swix\AmoCrm\Entity;
 
-use Swix\AmoCrm\Entity\Traits\BasicEntityTrait;
-
-class Task
+class Task extends AbstractEntity
 {
-    use BasicEntityTrait;
-
     /** @var int */
     private $elementId;
 

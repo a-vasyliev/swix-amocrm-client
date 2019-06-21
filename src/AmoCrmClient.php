@@ -3,6 +3,8 @@
 namespace Swix\AmoCrm;
 
 use GuzzleHttp\Client as HttpClient;
+use Swix\AmoCrm\Entity\Lead;
+use Swix\AmoCrm\Extractor\ExtractorManager;
 use Swix\AmoCrm\Hydrator\HydratorManager;
 use Webmozart\Assert\Assert;
 
@@ -27,14 +29,19 @@ class AmoCrmClient
     /** @var HydratorManager */
     protected $hydratorManager;
 
+    /** @var ExtractorManager */
+    protected $extractorManager;
+
     /**
      * @param HttpClient $httpClient
-     * @param HydratorManager $manager
+     * @param HydratorManager $hydratorManager
+     * @param ExtractorManager $extractorManager
      */
-    public function __construct(HttpClient $httpClient, HydratorManager $manager)
+    public function __construct(HttpClient $httpClient, HydratorManager $hydratorManager, ExtractorManager $extractorManager)
     {
-        $this->httpClient      = $httpClient;
-        $this->hydratorManager = $manager;
+        $this->httpClient       = $httpClient;
+        $this->hydratorManager  = $hydratorManager;
+        $this->extractorManager = $extractorManager;
     }
 
     /**
@@ -45,13 +52,20 @@ class AmoCrmClient
         return $this->httpClient;
     }
 
-
     /**
      * @return HydratorManager
      */
     protected function getHydratorManager()
     {
         return $this->hydratorManager;
+    }
+
+    /**
+     * @return ExtractorManager
+     */
+    protected function getExtractorManager()
+    {
+        return $this->extractorManager;
     }
 
     /**
@@ -77,12 +91,13 @@ class AmoCrmClient
      * Navigate through standard API structures.
      *
      * @param string $uri
+     * @param string $entityClass
      * @param array $query
      * @param int $limit
      *
      * @return array
      */
-    protected function paginate(string $uri, array $query = [], int $limit = null): array
+    protected function paginate(string $uri, string $entityClass, array $query = [], int $limit = null): array
     {
         Assert::nullOrNotEq($limit, 0);
 
@@ -119,7 +134,52 @@ class AmoCrmClient
             }
         }
 
-        return $data;
+        $hydrator = $this->getHydratorManager()->get($entityClass);
+
+        return $hydrator->hydrateRows($data);
+    }
+
+    protected function post(string $url, array $entities)
+    {
+        if (count($entities) == 0) {
+            return [];
+        }
+        $add = $update = [];
+        $extractor = $this->getExtractorManager()->get(get_class(current($entities)));
+
+        foreach ($entities as $key => $entity) {
+            Assert::methodExists($entity, 'hasId');
+
+            $extracted = $extractor->extract($entity);
+
+            // Mark rows with request_id to be able to map entity IDs to entity objects.
+            $extracted['request_id'] = $key;
+
+            if ($entity->hasId()) {
+                $update[] = $extracted;
+            } else {
+                $add[] = $extracted;
+            }
+        }
+
+        $client = $this->getHttpClient();
+        $response = $client->post($url, [
+            'form_params' => [
+                'add' => $add,
+                'update' => $update
+            ]
+        ]);
+        $responseData = json_decode($response->getBody()->getContents(), true);
+
+        foreach ($responseData['_embedded']['items'] as $item) {
+            Assert::keyExists($entities, $item['request_id']);
+            Assert::methodExists($entities[$item['request_id']], 'setId');
+
+            // Set entity ID provided by AmoCRM
+            $entities[$item['request_id']]->setId($item['id']);
+        }
+
+        return $entities;
     }
 
     /**
@@ -168,9 +228,15 @@ class AmoCrmClient
             }
         }
 
-        $data = $this->paginate('/api/v2/leads', $params, $limit);
-        $hydrator = $this->getHydratorManager()->getHydrator('\Swix\AmoCrm\Entity\Lead');
+        return $this->paginate('/api/v2/leads', '\Swix\AmoCrm\Entity\Lead', $params, $limit);
+    }
 
-        return $hydrator->hydrateRows($data);
+    /**
+     * @param Lead[] $leads
+     * @return Lead[]
+     */
+    public function addOrUpdateLeads(array $leads)
+    {
+        return $this->post('/api/v2/leads', $leads);
     }
 }

@@ -40,12 +40,22 @@ class CustomFieldValue
         return $this->enum;
     }
 
+    public function hasEnum(): bool
+    {
+        return !empty($this->getEnum());
+    }
+
     /**
      * @return string|null
      */
     public function getSubtype(): ?string
     {
         return $this->subtype;
+    }
+
+    public function hasSubtype(): bool
+    {
+        return !empty($this->getSubtype());
     }
 
     /**

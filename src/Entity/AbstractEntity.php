@@ -1,8 +1,8 @@
 <?php
 
-namespace Swix\AmoCrm\Entity\Traits;
+namespace Swix\AmoCrm\Entity;
 
-trait BasicEntityTrait
+abstract class AbstractEntity
 {
     /** @var int */
     protected $id;
@@ -38,7 +38,7 @@ trait BasicEntityTrait
 
     /**
      * @param int $id
-     * @return $this
+     * @return self
      */
     public function setId($id): self
     {
@@ -48,6 +48,14 @@ trait BasicEntityTrait
         $this->id = $id;
 
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasId()
+    {
+        return !empty($this->getId());
     }
 
     /**
@@ -90,7 +98,7 @@ trait BasicEntityTrait
 
     /**
      * @param int $createdBy
-     * @return BasicEntityTrait
+     * @return self
      */
     public function setCreatedBy(int $createdBy): self
     {
@@ -117,7 +125,7 @@ trait BasicEntityTrait
 
     /**
      * @param int $updatedAt
-     * @return BasicEntityTrait
+     * @return self
      */
     public function setUpdatedAt(int $updatedAt): self
     {
@@ -136,7 +144,7 @@ trait BasicEntityTrait
 
     /**
      * @param int $updatedBy
-     * @return BasicEntityTrait
+     * @return self
      */
     public function setUpdatedBy(int $updatedBy): self
     {
@@ -155,7 +163,7 @@ trait BasicEntityTrait
 
     /**
      * @param int $accountId
-     * @return BasicEntityTrait
+     * @return self
      */
     public function setAccountId(int $accountId): self
     {
@@ -174,7 +182,7 @@ trait BasicEntityTrait
 
     /**
      * @param int $groupId
-     * @return BasicEntityTrait
+     * @return self
      */
     public function setGroupId(int $groupId): self
     {

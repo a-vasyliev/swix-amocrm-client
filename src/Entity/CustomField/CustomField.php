@@ -10,7 +10,7 @@ class CustomField
 
     private $values = [];
 
-    public function __construct($id, string $name = null, array $values = [])
+    public function __construct(int $id, string $name = null, array $values = [])
     {
         foreach ($values as $value) {
             $this->addValue($value);
@@ -33,5 +33,20 @@ class CustomField
         }
 
         return $this;
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getValues(): array
+    {
+        return $this->values;
     }
 }

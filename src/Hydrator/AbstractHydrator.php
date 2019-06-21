@@ -7,12 +7,12 @@ use Webmozart\Assert\Assert;
 
 abstract class AbstractHydrator implements HydratorInterface
 {
-    private function recursiveUset(&$array, $unwantedKey)
+    private function recursiveUnset(&$array, $unwantedKey)
     {
         unset($array[$unwantedKey]);
         foreach ($array as &$value) {
             if (is_array($value)) {
-                $this->recursiveUset($value, $unwantedKey);
+                $this->recursiveUnset($value, $unwantedKey);
             }
         }
     }
@@ -20,7 +20,7 @@ abstract class AbstractHydrator implements HydratorInterface
     public function hydrateRows(array $rows): array
     {
         // It is assumed we do not preload any nested entities
-        $this->recursiveUset($rows, '_links');
+        $this->recursiveUnset($rows, '_links');
 
         $hydrated = [];
         foreach ($rows as $row) {
@@ -40,7 +40,7 @@ abstract class AbstractHydrator implements HydratorInterface
         }
     }
 
-    protected function setEntityValue($entity, string $name, $value)
+    protected function setEntityValue($entity, string $name, $value): self
     {
         switch ($name) {
             case 'custom_fields':

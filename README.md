@@ -14,8 +14,8 @@ Swix AmoCRM Client
 
 ## The Plan
 Work is actively in progress. What is expected in the nearest future:
-- Account information
-- Leads (with pipeline_id support)
+- Account information - Done
+- Leads (with pipeline_id support) - GET done, POST in progress
 - Contacts (with working lead IDs)
 - Notes
 - Tasks

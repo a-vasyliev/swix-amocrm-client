@@ -2,15 +2,13 @@
 
 namespace Swix\AmoCrm\Entity;
 
-use Swix\AmoCrm\Entity\Traits\BasicEntityTrait;
 use Swix\AmoCrm\Entity\Traits\CompanyTrait;
 use Swix\AmoCrm\Entity\Traits\CustomFieldsTrait;
 use Swix\AmoCrm\Entity\Traits\TagsTrait;
 use Webmozart\Assert\Assert;
 
-class Lead
+class Lead extends AbstractEntity
 {
-    use BasicEntityTrait;
     use TagsTrait;
     use CustomFieldsTrait;
     use CompanyTrait;

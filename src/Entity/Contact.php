@@ -2,12 +2,10 @@
 
 namespace Swix\AmoCrm\Entity;
 
-use Swix\AmoCrm\Entity\Traits\BasicEntityTrait;
 use Swix\AmoCrm\Entity\Traits\CompanyTrait;
 
-class Contact
+class Contact extends AbstractEntity
 {
-    use BasicEntityTrait;
     use CompanyTrait;
 
     /** @var string */
