@@ -170,7 +170,7 @@ class AmoCrmClient
 
         $client = $this->getHttpClient();
         $response = $client->post($url, [
-            'form_params' => [
+            'json' => [
                 'add' => $add,
                 'update' => $update
             ]
