@@ -4,6 +4,7 @@ namespace Swix\AmoCrm;
 
 use GuzzleHttp\HandlerStack;
 
+use Swix\AmoCrm\Extractor\ExtractorManager;
 use Swix\AmoCrm\Hydrator\HydratorManager;
 use Swix\AmoCrm\Middleware\AuthenticationMiddleware;
 use Swix\AmoCrm\Middleware\OtherErrorsMiddleware;
@@ -29,6 +30,6 @@ class ClientFactory
             'handler' => $handler,
         ]);
 
-        return new AmoCrmClient($client, new HydratorManager());
+        return new AmoCrmClient($client, new HydratorManager(), new ExtractorManager());
     }
 }

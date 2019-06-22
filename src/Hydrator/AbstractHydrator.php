@@ -40,7 +40,7 @@ abstract class AbstractHydrator implements HydratorInterface
         }
     }
 
-    protected function setEntityValue($entity, string $name, $value): self
+    protected function setEntityValue($entity, string $name, $value)
     {
         switch ($name) {
             case 'custom_fields':

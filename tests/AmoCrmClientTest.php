@@ -10,6 +10,7 @@ use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 
 use Swix\AmoCrm\AmoCrmClient;
+use Swix\AmoCrm\Extractor\ExtractorManager;
 use Swix\AmoCrm\Hydrator\HydratorManager;
 
 /**
@@ -33,7 +34,7 @@ class AmoCrmClientTest extends TestCase
         $this->mockHandler = new MockHandler();
         $this->httpClient = new HttpClient(['handler' => HandlerStack::create($this->mockHandler)]);
 
-        $this->client = new AmoCrmClient($this->httpClient, new HydratorManager());
+        $this->client = new AmoCrmClient($this->httpClient, new HydratorManager(), new ExtractorManager());
     }
 
     protected function tearDown()
