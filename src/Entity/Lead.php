@@ -41,7 +41,7 @@ class Lead extends AbstractEntity
     private $pipelineId;
 
     /** @var int|null */
-    private $lossReasonId;
+    private $lossReasonId = 0;
 
     /**
      * @return string|null
@@ -202,9 +202,9 @@ class Lead extends AbstractEntity
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getPipelineId(): int
+    public function getPipelineId(): ?int
     {
         return $this->pipelineId;
     }

@@ -8,7 +8,7 @@ use Webmozart\Assert\Assert;
 trait CustomFieldsTrait
 {
     /** @var array */
-    private $customFields;
+    private $customFields = [];
 
     public function setCustomFields(array $customFields)
     {

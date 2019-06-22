@@ -2,6 +2,7 @@
 
 namespace Swix\AmoCrm\Extractor;
 
+use Swix\AmoCrm\Entity\AbstractEntity;
 use Swix\AmoCrm\Entity\CustomField\CustomField;
 use Swix\AmoCrm\Entity\CustomField\CustomFieldValue;
 
@@ -31,7 +32,7 @@ abstract class AbstractExtractor implements ExtractorInterface
         return $extracted;
     }
 
-    public function extract($entity): array
+    public function extract(AbstractEntity $entity): array
     {
         return $this->extractByFields($entity, $this->basicFields);
     }

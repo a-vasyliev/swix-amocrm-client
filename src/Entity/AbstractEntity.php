@@ -4,32 +4,32 @@ namespace Swix\AmoCrm\Entity;
 
 abstract class AbstractEntity
 {
-    /** @var int */
+    /** @var int|null */
     protected $id;
 
-    /** @var int */
+    /** @var int|null */
     protected $responsibleUserId;
 
-    /** @var int */
+    /** @var int|null */
     protected $createdAt;
 
-    /** @var int */
+    /** @var int|null */
     protected $createdBy;
 
-    /** @var int */
+    /** @var int|null */
     protected $updatedAt;
 
-    /** @var int */
+    /** @var int|null */
     protected $updatedBy;
 
-    /** @var int */
+    /** @var int|null */
     protected $accountId;
 
-    /** @var int */
+    /** @var int|null */
     protected $groupId;
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getId()
     {
@@ -40,10 +40,10 @@ abstract class AbstractEntity
      * @param int $id
      * @return self
      */
-    public function setId($id): self
+    public function setId(int $id): self
     {
         if (isset($this->id)) {
-            //thr not immutable
+            throw new \RuntimeException('Entity ID is immutable');
         }
         $this->id = $id;
 
@@ -59,18 +59,18 @@ abstract class AbstractEntity
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getResponsibleUserId()
+    public function getResponsibleUserId(): ?int
     {
         return $this->responsibleUserId;
     }
 
     /**
-     * @param int $responsibleUserId
+     * @param int|null $responsibleUserId
      * @return $this
      */
-    public function setResponsibleUserId($responsibleUserId): self
+    public function setResponsibleUserId(int $responsibleUserId = null): self
     {
         $this->responsibleUserId = $responsibleUserId;
 
@@ -78,9 +78,9 @@ abstract class AbstractEntity
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getCreatedAt(): int
+    public function getCreatedAt(): ?int
     {
         return $this->createdAt;
     }
@@ -89,7 +89,7 @@ abstract class AbstractEntity
      * @param int $createdAt
      * @return $this
      */
-    public function setCreatedAt($createdAt): self
+    public function setCreatedAt(int $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -108,17 +108,17 @@ abstract class AbstractEntity
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getCreatedBy(): int
+    public function getCreatedBy(): ?int
     {
         return $this->createdBy;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getUpdatedAt(): int
+    public function getUpdatedAt(): ?int
     {
         return $this->updatedAt;
     }
@@ -135,7 +135,7 @@ abstract class AbstractEntity
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getUpdatedBy()
     {
@@ -154,7 +154,7 @@ abstract class AbstractEntity
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getAccountId()
     {
@@ -173,7 +173,7 @@ abstract class AbstractEntity
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getGroupId()
     {

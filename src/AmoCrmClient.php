@@ -151,7 +151,9 @@ class AmoCrmClient
             return [];
         }
         $add = $update = [];
-        $extractor = $this->getExtractorManager()->get(get_class(current($entities)));
+
+        $entityClass = '\\' . get_class(current($entities));
+        $extractor = $this->getExtractorManager()->get($entityClass);
 
         foreach ($entities as $key => $entity) {
             Assert::methodExists($entity, 'hasId');
@@ -169,6 +171,7 @@ class AmoCrmClient
         }
 
         $client = $this->getHttpClient();
+
         $response = $client->post($url, [
             'json' => [
                 'add' => $add,
@@ -176,6 +179,23 @@ class AmoCrmClient
             ]
         ]);
         $responseData = json_decode($response->getBody()->getContents(), true);
+
+        if (isset($responseData['_embedded']['errors'])) {
+            $errorList = $responseData['_embedded']['errors'];
+            $addErrors = $updateErrors = '';
+
+            if (isset($errorList['add'])) {
+                $addErrors = 'Issues with adding new entities of ' . $entityClass . ':'
+                    . PHP_EOL . implode(PHP_EOL, $errorList['add']);
+            }
+
+            if (isset($errorList['update'])) {
+                $updateErrors = 'Issues with updating new entities of ' . $entityClass . ':'
+                    . PHP_EOL . implode(PHP_EOL, $errorList['update']);
+            }
+
+            throw new \RuntimeException(implode(PHP_EOL . PHP_EOL, [$addErrors, $updateErrors]));
+        }
 
         foreach ($responseData['_embedded']['items'] as $item) {
             Assert::keyExists($entities, $item['request_id']);
