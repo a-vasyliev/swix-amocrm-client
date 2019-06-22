@@ -7,7 +7,8 @@ use Webmozart\Assert\Assert;
 class HydratorManager
 {
     protected $hydratorEntityClassMap = [
-        '\Swix\AmoCrm\Entity\Lead' => '\Swix\AmoCrm\Entity\Hydrator\LeadHydrator'
+        '\Swix\AmoCrm\Entity\Lead' => '\Swix\AmoCrm\Entity\Hydrator\LeadHydrator',
+        '\Swix\AmoCrm\Entity\Contact' => '\Swix\AmoCrm\Entity\Hydrator\ContactHydrator'
     ];
 
     protected $hydrators = [];

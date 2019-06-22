@@ -2,26 +2,22 @@
 
 namespace Swix\AmoCrm\Entity\Hydrator;
 
-use Swix\AmoCrm\Entity\Lead;
+use Swix\AmoCrm\Entity\Contact;
 use Swix\AmoCrm\Hydrator\AbstractHydrator;
 
-class LeadHydrator extends AbstractHydrator
+class ContactHydrator extends AbstractHydrator
 {
     public function createEntity()
     {
-        return new Lead();
+        return new Contact();
     }
 
     public function setEntityValue($entity, string $name, $value)
     {
-        /** @var Lead $entity */
+        /** @var Contact $entity */
 
-        if ($name == 'pipeline') {
-            return $this;
-        }
-
-        if ($name == 'contacts') {
-            $entity->setContacts($value['id']);
+        if ($name == 'leads') {
+            $entity->setLeadIds($value['id']);
 
             return $this;
         }
