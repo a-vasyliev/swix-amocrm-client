@@ -2,6 +2,7 @@
 
 namespace Swix\AmoCrm\Entity;
 
+use Swix\AmoCrm\Entity\Traits\CommonFieldsTrait;
 use Swix\AmoCrm\Entity\Traits\CompanyTrait;
 use Swix\AmoCrm\Entity\Traits\CustomFieldsTrait;
 use Swix\AmoCrm\Entity\Traits\TagsTrait;
@@ -12,6 +13,7 @@ class Lead extends AbstractEntity
     use TagsTrait;
     use CustomFieldsTrait;
     use CompanyTrait;
+    use CommonFieldsTrait;
 
     /** @var string|null */
     private $name;

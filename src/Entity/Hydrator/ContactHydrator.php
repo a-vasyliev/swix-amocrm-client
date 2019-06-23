@@ -17,7 +17,7 @@ class ContactHydrator extends AbstractHydrator
         /** @var Contact $entity */
 
         if ($name == 'leads') {
-            $entity->setLeadIds($value['id']);
+            $entity->setLeads($value['id']);
 
             return $this;
         }

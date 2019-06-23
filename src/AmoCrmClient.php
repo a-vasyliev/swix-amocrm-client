@@ -5,6 +5,7 @@ namespace Swix\AmoCrm;
 use GuzzleHttp\Client as HttpClient;
 use Swix\AmoCrm\Entity\Contact;
 use Swix\AmoCrm\Entity\Lead;
+use Swix\AmoCrm\Entity\Note;
 use Swix\AmoCrm\Extractor\ExtractorManager;
 use Swix\AmoCrm\Hydrator\HydratorManager;
 use Webmozart\Assert\Assert;
@@ -18,10 +19,13 @@ class AmoCrmClient
 {
     const ACCOUNT_SCOPES = ['custom_fields', 'users', 'pipelines', 'groups', 'note_types', 'task_types'];
 
-    const LEADS_PARAMS = ['id', 'query', 'responsible_user_id', 'with', 'status', 'filter'];
+    const LEADS_PARAMS = ['id', 'query', 'responsible_user_id', 'with', 'status', 'filter', 'if-modified-since'];
     const LEADS_WITH = ['is_price_modified_by_robot', 'loss_reason_name'];
 
-    const CONTACTS_PARAMS = ['id', 'query', 'responsible_user_id'];
+    const CONTACTS_PARAMS = ['id', 'query', 'responsible_user_id', 'if-modified-since'];
+
+    const NOTES_PARAMS = ['id', 'type', 'require', 'element_id', 'note_type', 'if-modified-since'];
+    const NOTE_ELEMENT_TYPES = ['contact', 'lead', 'company', 'task', 'customer'];
 
     /** @var int */
     protected $pageLimit = 500;
@@ -115,6 +119,16 @@ class AmoCrmClient
         $query['limit_rows'] = $smallestLimit;
         $lastCount = $offset = 0;
 
+        $headers = [];
+        if (isset($query['if-modified-since'])) {
+            /** @var \DateTime $modifiedSince */
+            $modifiedSince = $query['if-modified-since'];
+            Assert::isInstanceOf($modifiedSince, '\DateTime');
+
+            $headers['If-Modified-Since'] = $modifiedSince->format('D, d M Y H:i:s T');
+            unset($query['if-modified-since']);
+        }
+
         while ($offset == 0 || $lastCount == $smallestLimit) {
             $query['limit_offset'] = $offset;
 
@@ -123,7 +137,9 @@ class AmoCrmClient
                 $query['limit_rows'] = $limit - $offset;
             }
 
-            $response = $httpClient->get($uri . '?' . http_build_query($query));
+            $response = $httpClient->get($uri . '?' . http_build_query($query), [
+                'headers' => $headers
+            ]);
             $responseData = json_decode($response->getBody()->getContents(), true);
 
             if (!isset($responseData['_embedded']['items'])) {
@@ -263,12 +279,25 @@ class AmoCrmClient
     }
 
     /**
-     * @param Lead[] $leads
+     * @param array $ids
      * @return Lead[]
      */
-    public function addOrUpdateLeads(array $leads)
+    public function getLeadsByIds(array $ids): array
     {
-        return $this->post('/api/v2/leads', $leads);
+        Assert::allNumeric($ids);
+
+        return $this->getLeads(['id' => $ids]);
+    }
+
+    /**
+     * @param Lead[] $leads
+     * @return $this
+     */
+    public function saveLeads(array $leads): self
+    {
+        $this->post('/api/v2/leads', $leads);
+
+        return $this;
     }
 
     /**
@@ -284,11 +313,74 @@ class AmoCrmClient
     }
 
     /**
-     * @param Contact[] $leads
+     * @param array $ids
      * @return Contact[]
      */
-    public function addOrUpdateContacts(array $leads)
+    public function getContactsByIds(array $ids): array
     {
-        return $this->post('/api/v2/contacts', $leads);
+        Assert::allNumeric($ids);
+
+        return $this->getContacts(['id' => $ids]);
+    }
+
+    /**
+     * @param Contact[] $contacts
+     * @return $this
+     */
+    public function saveContacts(array $contacts): self
+    {
+        $this->post('/api/v2/contacts', $contacts);
+
+        return $this;
+    }
+
+    /**
+     * @param array $params
+     * @param int|null $limit
+     * @return Note[]
+     */
+    public function getNotes(array $params = [], int $limit = null): array
+    {
+        Assert::allOneOf(array_keys($params), self::NOTES_PARAMS);
+
+        if (isset($params['type'])) {
+            Assert::allOneOf($params['type'], array_keys(self::NOTE_ELEMENT_TYPES));
+        }
+
+        if (isset($params['require'])) {
+            Assert::boolean($params['require']);
+        }
+
+        if (isset($params['element_id'])) {
+            Assert::numeric($params['element_id']);
+        }
+
+        if (isset($params['note_type'])) {
+            Assert::allOneOf($params['note_type'], Note::NOTE_TYPES);
+        }
+
+        return $this->paginate('/api/v2/notes', '\Swix\AmoCrm\Entity\Note', $params, $limit);
+    }
+
+    /**
+     * @param array $ids
+     * @return Note[]
+     */
+    public function getNotesByIds(array $ids): array
+    {
+        Assert::allNumeric($ids);
+
+        return $this->getNotes(['id' => $ids]);
+    }
+
+    /**
+     * @param Note[] $notes
+     * @return $this
+     */
+    public function saveNotes(array $notes): self
+    {
+        $this->post('/api/v2/notes', $notes);
+
+        return $this;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Swix\AmoCrm\Entity;
 
+use Swix\AmoCrm\Entity\Traits\CommonFieldsTrait;
 use Swix\AmoCrm\Entity\Traits\CompanyTrait;
 use Swix\AmoCrm\Entity\Traits\CustomFieldsTrait;
 use Swix\AmoCrm\Entity\Traits\TagsTrait;
@@ -11,12 +12,13 @@ class Contact extends AbstractEntity
     use CompanyTrait;
     use TagsTrait;
     use CustomFieldsTrait;
+    use CommonFieldsTrait;
 
     /** @var string */
     protected $name;
 
     /** @var array */
-    protected $leadIds = [];
+    protected $leads = [];
 
     /** @var int|null */
     protected $closestTaskAt;
@@ -46,18 +48,18 @@ class Contact extends AbstractEntity
     /**
      * @return array
      */
-    public function getLeadIds(): array
+    public function getLeads(): array
     {
-        return $this->leadIds;
+        return $this->leads;
     }
 
     /**
-     * @param array $leadIds
+     * @param array $leads
      * @return Contact
      */
-    public function setLeadIds(array $leadIds): Contact
+    public function setLeads(array $leads): Contact
     {
-        $this->leadIds = $leadIds;
+        $this->leads = $leads;
 
         return $this;
     }
